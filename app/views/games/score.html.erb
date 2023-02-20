@@ -1,0 +1,13 @@
+<h1>Result</h1>
+<% if @answer == "good" %>
+  <b><%= "Congratulations"%></b><%=", #{params[:word].upcase} is a valid English word" %>
+<% elsif @answer == "not english" %>
+  <%= "Sorry but "%><b><%="#{params[:word].upcase} "%></b><%= "doesn't seem to be an English word"%>
+<% elsif @answer == "not on the grid" %>
+  <%= "Sorry but "%><b><%="#{params[:word].upcase} "%></b><%= "can't be build out of"%>
+  <%@letters.each { |letter|%> <%=letter%><%}%>
+<% end %>
+
+<div>
+<%= link_to "Play again", new_path %>
+</div>
