@@ -1,15 +1,17 @@
-<h1>New game</h1>
+<div class = "m-3 container">
+  <h1>New game</h1>
 
-<div>
-  <% @letters.each do |letter|%>
-    <%= letter %>
-  <% end %>
+  <div class="d-flex">
+    <% @letters.each do |letter|%>
+      <p class= "p-3 m-2 bg-primary fw-bold text-white text-center shadow-sm rounded" style = "width:60px"><%= letter %></p>
+    <% end %>
+  </div>
+
+  <p>What is the longest word you can find?</p>
+  <form action="/score" method="post" data-turbo="false">
+    <input type="text" name="word">
+    <input type="submit" value="Play">
+    <input id="letters" name="letters" type="hidden" value="<%= @letters.join %>" />
+    <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+  </form>
 </div>
-
-<p>What is the longest word you can find?</p>
-<form action="/score" method="post" data-turbo="false">
-  <input type="text" name="word">
-  <input type="submit" value="Play">
-  <input id="letters" name="letters" type="hidden" value="<%= @letters.join %>" />
-  <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-</form>

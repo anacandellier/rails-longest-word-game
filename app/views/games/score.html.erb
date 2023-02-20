@@ -1,13 +1,20 @@
+<div class="container">
 <h1>Result</h1>
 <% if @answer == "good" %>
   <b><%= "Congratulations"%></b><%=", #{params[:word].upcase} is a valid English word" %>
+  <p>Your score is <%= @score %></p>
+  <p>Your total score is <%= @total_score %></p>
 <% elsif @answer == "not english" %>
   <%= "Sorry but "%><b><%="#{params[:word].upcase} "%></b><%= "doesn't seem to be an English word"%>
+  <p>Your total score is <%= @total_score %></p>
 <% elsif @answer == "not on the grid" %>
   <%= "Sorry but "%><b><%="#{params[:word].upcase} "%></b><%= "can't be build out of"%>
   <%@letters.each { |letter|%> <%=letter%><%}%>
+  <p>Your total score is <%= @total_score %></p>
 <% end %>
 
 <div>
 <%= link_to "Play again", new_path %>
+</div>
+
 </div>

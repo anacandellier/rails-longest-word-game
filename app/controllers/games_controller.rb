@@ -9,6 +9,7 @@ class GamesController < ApplicationController
   end
 
   def score
+    @score = 0
     good = true
     @word = params[:word].upcase.chars
     @letters = params[:letters].split("")
@@ -17,10 +18,15 @@ class GamesController < ApplicationController
     end
     if good == true && JSON.parse(URI.open("https://wagon-dictionary.herokuapp.com/#{params[:word]}").read)['found'] == true
       @answer = 'good'
+      @score = @word.size
+      session[:score] += @score
+      @total_score = session[:score]
     elsif good == true && JSON.parse(URI.open("https://wagon-dictionary.herokuapp.com/#{params[:word]}").read)['found'] == false
       @answer = 'not english'
+      @total_score = session[:score]
     elsif good == false
       @answer = 'not on the grid'
+      @total_score = session[:score]
     end
   end
 end
